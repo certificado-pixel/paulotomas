@@ -394,9 +394,9 @@
       <div class="success-box" id="success-box">
         Inscrição recebida! Sua vaga está garantida.
         <br><br>
-        Entre agora no grupo exclusivo do WhatsApp pra receber o link da live:
+        Você vai ser redirecionado agora pro grupo exclusivo do WhatsApp pra receber o link da live:
         <br>
-        <a id="wa-link" class="wa-btn" href="#" target="_blank" rel="noopener">Entrar no grupo do WhatsApp</a>
+        <a id="wa-link" class="wa-btn" href="#" rel="noopener">Entrar no grupo do WhatsApp</a>
       </div>
       <p class="fine-print">Inscrição gratuita. Ao se inscrever, você entra no grupo exclusivo e recebe o link no dia.</p>
     </div>
@@ -537,6 +537,10 @@
       form.reset();
       submitBtn.disabled=false;
       submitBtn.textContent='Quero participar da live';
+      // Leva automaticamente pro grupo do WhatsApp depois de mostrar a confirmação
+      setTimeout(function(){
+        window.location.href = WHATSAPP_GROUP_LINK;
+      }, 1800);
     }).catch(function(){
       submitBtn.disabled=false;
       submitBtn.textContent='Quero participar da live';
