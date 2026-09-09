@@ -76,17 +76,15 @@
   .meta-chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
   .chip{
     border:1px solid var(--hairline);background:var(--bg-card);
-    padding:8px 14px;border-radius:999px;font-size:.82rem;color:var(--ink);
+    padding:11px 18px;border-radius:999px;font-size:.95rem;font-weight:600;color:var(--ink);
     display:flex;align-items:center;gap:8px;
   }
   .chip b{color:var(--gold);font-weight:700;}
   .chip-date{
     border:1px solid rgba(236,189,81,.55);
     background:linear-gradient(180deg,rgba(236,189,81,.2),rgba(236,189,81,.06));
-    padding:11px 18px;font-size:.95rem;font-weight:600;
     box-shadow:0 0 0 1px rgba(236,189,81,.08) inset;
   }
-  .chip-date b{font-size:1.02rem;}
   .hero-cta{margin-top:34px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
   .btn-primary{
     background:linear-gradient(180deg,var(--gold),var(--copper));
@@ -126,14 +124,18 @@
   .speaker-name{font-weight:700;font-size:.95rem;}
   .speaker-role{font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;}
   .hero-logo{width:320px;height:320px;display:block;margin:0 auto;}
-  .mini-presenters{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:28px;}
+  .mini-presenters{
+    display:flex;flex-direction:column;align-items:center;gap:10px;margin-top:32px;
+    padding:20px 26px;border:1px solid var(--hairline);border-radius:16px;background:var(--bg-card);
+  }
+  .mini-label{font-size:.72rem;color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-weight:700;}
   .mini-avatars{display:flex;}
   .mini-avatars img{
     width:48px;height:48px;border-radius:50%;object-fit:cover;
-    border:3px solid var(--bg);margin-left:-14px;display:block;
+    border:3px solid var(--bg-card);margin-left:-14px;display:block;
   }
   .mini-avatars img:first-child{margin-left:0;}
-  .mini-presenters span{font-size:.8rem;color:var(--ink-muted);text-align:center;letter-spacing:.02em;}
+  .mini-names{font-size:.82rem;color:var(--ink-muted);text-align:center;letter-spacing:.01em;}
 
   /* ---- STAT RIBBON ---- */
   .stat-ribbon{background:var(--bg-panel);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
@@ -201,6 +203,25 @@
   .wa-btn:hover{filter:brightness(1.05);}
   .error-msg{color:var(--copper);font-size:.8rem;display:none;}
   .error-msg.show{display:block;}
+
+  /* ---- FAQ ---- */
+  .faq-section{padding:64px 0;border-top:1px solid var(--hairline);}
+  .faq-list{max-width:760px;margin:28px auto 0;display:flex;flex-direction:column;gap:12px;}
+  .faq-item{
+    background:var(--bg-card);border:1px solid var(--hairline);border-radius:14px;
+    padding:18px 22px;
+  }
+  .faq-item summary{
+    cursor:pointer;font-weight:700;font-size:1rem;color:var(--ink);
+    list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"+";color:var(--gold);font-size:1.4rem;font-weight:400;flex:none;line-height:1;
+    transition:transform .25s ease;
+  }
+  .faq-item[open] summary::after{transform:rotate(45deg);}
+  .faq-item p{margin-top:14px;color:var(--ink-muted);font-size:.92rem;line-height:1.6;}
 
   footer{padding:48px 0 60px;text-align:center;}
   footer p{color:var(--ink-muted);font-size:.8rem;max-width:60ch;margin:0 auto;}
@@ -278,12 +299,13 @@
     <div class="speaker-col">
       <img class="hero-logo reveal d1" src="logo.png" alt="Método Monopolize">
       <div class="mini-presenters reveal d2">
+        <span class="mini-label">Apresentado por</span>
         <div class="mini-avatars">
           <img src="elias.jpg" alt="Elias Evangelista">
           <img src="paulo.jpg" alt="Paulo Henrique">
           <img src="domingos.jpg" alt="Domingos">
         </div>
-        <span>Apresentado por Elias, Paulo e Domingos</span>
+        <span class="mini-names">Elias Evangelista · Paulo Henrique · Domingos</span>
       </div>
     </div>
   </div>
@@ -377,6 +399,38 @@
         <a id="wa-link" class="wa-btn" href="#" target="_blank" rel="noopener">Entrar no grupo do WhatsApp</a>
       </div>
       <p class="fine-print">Inscrição gratuita. Ao se inscrever, você entra no grupo exclusivo e recebe o link no dia.</p>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <div class="wrap">
+    <div class="eyebrow" style="text-align:center;">Dúvidas frequentes</div>
+    <div class="faq-list">
+      <details class="faq-item reveal d0">
+        <summary>A live é realmente gratuita?</summary>
+        <p>Sim. A inscrição e a participação são 100% gratuitas — não tem nenhum custo pra entrar no grupo exclusivo ou assistir à live.</p>
+      </details>
+      <details class="faq-item reveal d1">
+        <summary>Preciso ter experiência com vendas ou tráfego pago?</summary>
+        <p>Não. A live mostra o passo a passo tanto pra quem já vende quanto pra quem está começando a se afiliar e quer um produto de alto ticket pra promover.</p>
+      </details>
+      <details class="faq-item reveal d2">
+        <summary>Como funciona a comissão de 9%?</summary>
+        <p>Você recebe 9% de comissão sobre cada venda do Monopolize White Label — um ticket de R$ 20.000, o que dá R$ 1.800 direto pra você por venda.</p>
+      </details>
+      <details class="faq-item reveal d3">
+        <summary>Preciso já ser afiliado da Maisfy?</summary>
+        <p>Não precisa. Durante a live, o Domingos (CEO da Maisfy) explica como fazer sua afiliação gratuita e começar a vender.</p>
+      </details>
+      <details class="faq-item reveal d4">
+        <summary>Como eu recebo o link de acesso à live?</summary>
+        <p>Depois de preencher o formulário de inscrição, você entra no grupo exclusivo do WhatsApp, onde o link é enviado no dia do evento.</p>
+      </details>
+      <details class="faq-item reveal d5">
+        <summary>Vai ficar gravação disponível depois?</summary>
+        <p>A live é ao vivo e pensada pra quem participar no horário. Garanta sua vaga e fique de olho no grupo do WhatsApp pra não perder o link.</p>
+      </details>
     </div>
   </div>
 </section>
