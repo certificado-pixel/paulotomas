@@ -119,6 +119,14 @@
   .speaker-name{font-weight:700;font-size:.95rem;}
   .speaker-role{font-size:.78rem;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;}
   .hero-logo{width:320px;height:320px;display:block;margin:0 auto;}
+  .mini-presenters{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:28px;}
+  .mini-avatars{display:flex;}
+  .mini-avatars img{
+    width:48px;height:48px;border-radius:50%;object-fit:cover;
+    border:3px solid var(--bg);margin-left:-14px;display:block;
+  }
+  .mini-avatars img:first-child{margin-left:0;}
+  .mini-presenters span{font-size:.8rem;color:var(--ink-muted);text-align:center;letter-spacing:.02em;}
 
   /* ---- STAT RIBBON ---- */
   .stat-ribbon{background:var(--bg-panel);border-top:1px solid var(--hairline);border-bottom:1px solid var(--hairline);}
@@ -239,7 +247,7 @@
     <div>
       <div class="eyebrow reveal d0">Live gratuita · Monopolize</div>
       <h1 class="reveal d1">Ganhe <span class="accent">9%</span> vendendo o método que domina o mercado bilionário das formaturas</h1>
-      <p class="hero-sub reveal d2">Como lucrar R$ 1.800 por venda promovendo o Método Monopolize.</p>
+      <p class="hero-sub reveal d2">Com Elias Evangelista, Paulo Henrique e Domingos ao vivo: como lucrar R$ 1.800 por venda promovendo o Método Monopolize.</p>
 
       <div class="meta-chips reveal d2">
         <div class="chip"><b>Terça-feira</b>&nbsp;15 de setembro</div>
@@ -262,6 +270,14 @@
 
     <div class="speaker-col">
       <img class="hero-logo reveal d1" src="logo.png" alt="Método Monopolize">
+      <div class="mini-presenters reveal d2">
+        <div class="mini-avatars">
+          <img src="elias.jpg" alt="Elias Evangelista">
+          <img src="paulo.jpg" alt="Paulo Henrique">
+          <img src="domingos.jpg" alt="Domingos">
+        </div>
+        <span>Apresentado por Elias, Paulo e Domingos</span>
+      </div>
     </div>
   </div>
 </div>
