@@ -139,11 +139,15 @@
   /* ---- PRESENTERS ---- */
   .presenters{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
   .presenter-card{
-    background:var(--bg-card);border:1px solid var(--hairline);border-radius:18px;padding:28px 24px;
+    background:var(--bg-card);border:1px solid var(--hairline);border-radius:18px;
+    padding:16px 20px 28px;text-align:center;
   }
-  .presenter-card .avatar{width:64px;height:64px;font-size:1.3rem;margin-bottom:16px;}
-  .presenter-card h4{font-family:"Playfair Display",serif;font-size:1.15rem;font-weight:600;margin:0;}
-  .presenter-card .role{color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-top:4px;display:block;}
+  .presenter-card .avatar{
+    width:100%;height:auto;aspect-ratio:280/360;object-fit:cover;border-radius:12px;
+    margin-bottom:18px;display:block;
+  }
+  .presenter-card h4{font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:600;margin:0;color:var(--gold);}
+  .presenter-card .role{color:var(--gold);font-size:.76rem;text-transform:uppercase;letter-spacing:.1em;margin-top:6px;display:block;}
   .presenter-card p{margin-top:14px;color:var(--ink-muted);font-size:.88rem;line-height:1.6;}
 
   /* ---- FORM ---- */
@@ -305,19 +309,19 @@
     <div class="eyebrow" style="text-align:center;">Quem apresenta</div>
     <div class="presenters" style="margin-top:28px;">
       <div class="presenter-card reveal d0">
-        <img class="avatar" src="paulo.jpg" alt="Paulo Henrique Tomás">
+        <img class="avatar" src="paulo-portrait.jpg" alt="Paulo Henrique Tomás">
         <h4>Paulo Henrique Tomás</h4>
         <span class="role">Mentor · Fundador da Monopolize</span>
         <p>15 anos no mercado de formaturas e autor do Método Monopolize. Criador do produto White Label, com certificação reconhecida pelo MEC (FABRANI) e milhares de alunos formados.</p>
       </div>
       <div class="presenter-card reveal d1">
-        <img class="avatar" src="elias.jpg" alt="Elias Evangelista">
+        <img class="avatar" src="elias-portrait.jpg" alt="Elias Evangelista">
         <h4>Elias Evangelista</h4>
         <span class="role">Host</span>
         <p>Especialista em vendas e lançamentos digitais. Conduz a live do início ao fim: a oportunidade, a matemática da comissão e as frentes de venda para os afiliados Maisfy.</p>
       </div>
       <div class="presenter-card reveal d2">
-        <img class="avatar" src="domingos.jpg" alt="Domingos">
+        <img class="avatar" src="domingos-portrait.jpg" alt="Domingos">
         <h4>Domingos</h4>
         <span class="role">Co-host · CEO da Maisfy</span>
         <p>Lidera a Maisfy conectando produtores e afiliados. Mostra por que vender pela plataforma, como funciona a afiliação e como acompanhar suas comissões.</p>
