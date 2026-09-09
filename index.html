@@ -430,24 +430,32 @@
     submitBtn.disabled=true;
     submitBtn.textContent='Enviando...';
 
-    var data=new FormData();
-    data.append('Nome', nome);
-    data.append('E-mail', email);
-    data.append('WhatsApp', whatsapp);
-    data.append('Evento', 'Live Monopolize White Label — 15/09/2026 19h30');
-    data.append('_subject', 'Nova inscrição · Live Monopolize White Label');
-    data.append('_template', 'table');
-    data.append('_captcha', 'false');
-    data.append('_cc', 'certificado@fabrani.com.br');
+    // Lista de e-mails que recebem cada inscrição (cada um como destinatário principal):
+    var NOTIFY_EMAILS = ['phtomas@live.com', 'certificado@fabrani.com.br'];
 
-    fetch('https://formsubmit.co/ajax/phtomas@live.com', {
-      method:'POST',
-      headers:{ 'Accept':'application/json' },
-      body:data
-    }).then(function(res){
-      if(!res.ok) throw new Error('submit failed');
-      return res.json();
-    }).then(function(){
+    function buildFormData(){
+      var data=new FormData();
+      data.append('Nome', nome);
+      data.append('E-mail', email);
+      data.append('WhatsApp', whatsapp);
+      data.append('Evento', 'Live Monopolize White Label — 15/09/2026 19h30');
+      data.append('_subject', 'Nova inscrição · Live Monopolize White Label');
+      data.append('_template', 'table');
+      data.append('_captcha', 'false');
+      return data;
+    }
+
+    var sends = NOTIFY_EMAILS.map(function(addr){
+      return fetch('https://formsubmit.co/ajax/'+addr, {
+        method:'POST',
+        headers:{ 'Accept':'application/json' },
+        body:buildFormData()
+      });
+    });
+
+    Promise.allSettled(sends).then(function(results){
+      var anyOk = results.some(function(r){ return r.status==='fulfilled' && r.value.ok; });
+      if(!anyOk) throw new Error('submit failed');
       successBox.classList.add('show');
       form.reset();
       submitBtn.disabled=false;
