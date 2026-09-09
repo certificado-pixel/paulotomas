@@ -178,6 +178,11 @@
     background:var(--gold-soft);border:1px solid var(--hairline);margin-top:20px;color:var(--ink);font-size:.9rem;
   }
   .success-box.show{display:block;}
+  .wa-btn{
+    display:inline-block;margin-top:14px;background:#25D366;color:#0b1a10;font-weight:700;
+    font-size:.92rem;padding:13px 24px;border-radius:10px;text-decoration:none;
+  }
+  .wa-btn:hover{filter:brightness(1.05);}
   .error-msg{color:var(--copper);font-size:.8rem;display:none;}
   .error-msg.show{display:block;}
 
@@ -351,7 +356,13 @@
         <span class="error-msg" id="error-msg">Confira os campos — preencha nome, e-mail e WhatsApp válidos.</span>
         <button type="submit" class="submit-btn">Quero participar da live</button>
       </form>
-      <div class="success-box" id="success-box">Inscrição recebida! Confirme o envio no seu app de e-mail para garantir sua vaga — você entra no grupo exclusivo e recebe o link no dia.</div>
+      <div class="success-box" id="success-box">
+        Inscrição recebida! Sua vaga está garantida.
+        <br><br>
+        Entre agora no grupo exclusivo do WhatsApp pra receber o link da live:
+        <br>
+        <a id="wa-link" class="wa-btn" href="#" target="_blank" rel="noopener">Entrar no grupo do WhatsApp</a>
+      </div>
       <p class="fine-print">Inscrição gratuita. Ao se inscrever, você entra no grupo exclusivo e recebe o link no dia.</p>
     </div>
   </div>
@@ -405,6 +416,15 @@
   var form=document.getElementById('reg-form');
   var errorMsg=document.getElementById('error-msg');
   var successBox=document.getElementById('success-box');
+  var submitBtn=form.querySelector('.submit-btn');
+
+  // TROQUE AQUI quando o Paulo mandar o link do grupo do WhatsApp:
+  var WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/COLOQUE_O_LINK_AQUI";
+  document.getElementById('wa-link').href = WHATSAPP_GROUP_LINK;
+
+  var VALIDATION_ERROR = 'Confira os campos — preencha nome, e-mail e WhatsApp válidos.';
+  var SUBMIT_ERROR = 'Não conseguimos enviar sua inscrição agora. Tente novamente em instantes.';
+
   form.addEventListener('submit',function(e){
     e.preventDefault();
     var nome=document.getElementById('nome').value.trim();
@@ -412,15 +432,41 @@
     var whatsapp=document.getElementById('whatsapp').value.trim();
     var emailOk=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     if(!nome||!emailOk||!whatsapp){
+      errorMsg.textContent=VALIDATION_ERROR;
       errorMsg.classList.add('show');
       return;
     }
     errorMsg.classList.remove('show');
-    var subject=encodeURIComponent('Inscrição · Live Monopolize White Label 15/09');
-    var body=encodeURIComponent('Nome: '+nome+'\nE-mail: '+email+'\nWhatsApp: '+whatsapp+'\nEvento: Live Monopolize White Label, 15/09/2026 19h30');
-    window.location.href='mailto:certificado@fabrani.com.br?subject='+subject+'&body='+body;
-    successBox.classList.add('show');
-    form.reset();
+    submitBtn.disabled=true;
+    submitBtn.textContent='Enviando...';
+
+    var data=new FormData();
+    data.append('Nome', nome);
+    data.append('E-mail', email);
+    data.append('WhatsApp', whatsapp);
+    data.append('Evento', 'Live Monopolize White Label — 15/09/2026 19h30');
+    data.append('_subject', 'Nova inscrição · Live Monopolize White Label');
+    data.append('_template', 'table');
+    data.append('_captcha', 'false');
+
+    fetch('https://formsubmit.co/ajax/phtomas@live.com', {
+      method:'POST',
+      headers:{ 'Accept':'application/json' },
+      body:data
+    }).then(function(res){
+      if(!res.ok) throw new Error('submit failed');
+      return res.json();
+    }).then(function(){
+      successBox.classList.add('show');
+      form.reset();
+      submitBtn.disabled=false;
+      submitBtn.textContent='Quero participar da live';
+    }).catch(function(){
+      submitBtn.disabled=false;
+      submitBtn.textContent='Quero participar da live';
+      errorMsg.textContent=SUBMIT_ERROR;
+      errorMsg.classList.add('show');
+    });
   });
 })();
 </script>
