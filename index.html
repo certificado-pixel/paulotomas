@@ -492,7 +492,6 @@
   document.getElementById('wa-link').href = WHATSAPP_GROUP_LINK;
 
   var VALIDATION_ERROR = 'Confira os campos — preencha nome, e-mail e WhatsApp válidos.';
-  var SUBMIT_ERROR = 'Não conseguimos enviar sua inscrição agora. Tente novamente em instantes.';
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
@@ -532,9 +531,9 @@
       });
     });
 
-    Promise.allSettled(sends).then(function(results){
-      var anyOk = results.some(function(r){ return r.status==='fulfilled' && r.value.ok; });
-      if(!anyOk) throw new Error('submit failed');
+    // Mesmo que o envio de notificação por e-mail falhe, a pessoa segue o fluxo normal
+    // de sucesso e vai pro grupo do WhatsApp — ela nunca deve ver uma mensagem de erro aqui.
+    function goToSuccess(){
       successBox.classList.add('show');
       form.reset();
       submitBtn.disabled=false;
@@ -543,12 +542,9 @@
       setTimeout(function(){
         window.location.href = WHATSAPP_GROUP_LINK;
       }, 1800);
-    }).catch(function(){
-      submitBtn.disabled=false;
-      submitBtn.textContent='Quero participar da live';
-      errorMsg.textContent=SUBMIT_ERROR;
-      errorMsg.classList.add('show');
-    });
+    }
+
+    Promise.allSettled(sends).then(goToSuccess).catch(goToSuccess);
   });
 })();
 </script>
